@@ -13,7 +13,7 @@ pipeline {
 
         stage('Step 2') {
             agent {
-                label 'slave2'
+                label 'master'
             }
             steps {
                 input('Do you want to proceed?')
