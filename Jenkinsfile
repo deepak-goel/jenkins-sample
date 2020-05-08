@@ -7,6 +7,7 @@ pipeline {
                 label 'slave1'
             }
             steps {
+                sh 'hostname && pwd'
                 echo "This is the first step of our pipeline"
             }
         }
@@ -25,6 +26,7 @@ pipeline {
                 label 'master'
             }
             steps {
+                sh 'hostname && pwd'
                 echo "Just a regular stage. Nothing interesting here"
             }
         }
@@ -34,6 +36,7 @@ pipeline {
                 label 'slave1'
             }
             steps {
+                sh 'hostname && pwd'
                 echo "Just a regular stage. Nothing interesting here"
             }
         }
@@ -42,11 +45,13 @@ pipeline {
             parallel {
                 stage('Parallel Stage 1') {
                     steps {
+                        sh 'hostname && pwd'
                         echo "This is the first parallel stage"
                     }
                 }
                 stage('Parallel Stage 2') {
                     steps {
+                        sh 'hostname && pwd'
                         echo "This is the second parallel stage"
                     }
                 }
