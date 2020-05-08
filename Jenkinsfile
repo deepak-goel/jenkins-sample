@@ -47,12 +47,20 @@ pipeline {
                     steps {
                         sh 'hostname && pwd'
                         echo "This is the first parallel stage"
+                        sh 'ls -al'
+                        sh 'sleep 2'
+                        sh 'touch file'
                     }
                 }
                 stage('Parallel Stage 2') {
                     steps {
                         sh 'hostname && pwd'
                         echo "This is the second parallel stage"
+                        sh 'ls -al'
+                        sh 'sleep 5'
+                        sh 'echo "after sleep"'
+                        sh 'ls -al'
+
                     }
                 }
             }
