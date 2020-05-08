@@ -11,16 +11,19 @@ pipeline {
             }
         }
 
-        stage('Step 2') {
+        // stage('Step 2') {
+        //     agent {
+        //         label 'master'
+        //     }
+        //     steps {
+        //         input('Do you want to proceed?')
+        //     }
+        // }
+
+        stage('Step 3') {
             agent {
                 label 'master'
             }
-            steps {
-                input('Do you want to proceed?')
-            }
-        }
-
-        stage('Step 3') {
             steps {
                 echo "Just a regular stage. Nothing interesting here"
             }
