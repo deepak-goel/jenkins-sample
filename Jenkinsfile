@@ -32,11 +32,17 @@ pipeline {
         stage('Step 4') {
             parallel {
                 stage('Parallel Stage 1') {
+                    agent {
+                        label 'master'
+                    }
                     steps {
                         echo "This is the first parallel stage"
                     }
                 }
                 stage('Parallel Stage 2') {
+                    agent {
+                        label 'slave1'
+                    }
                     steps {
                         echo "This is the second parallel stage"
                     }
