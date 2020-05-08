@@ -3,12 +3,18 @@ pipeline {
     stages {
 
         stage('Step 1') {
+            agent {
+                label 'slave1'
+            }
             steps {
                 echo "This is the first step of our pipeline"
             }
         }
 
         stage('Step 2') {
+            agent {
+                label 'slave2'
+            }
             steps {
                 input('Do you want to proceed?')
             }
