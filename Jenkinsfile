@@ -28,8 +28,8 @@ pipeline {
                 echo "Just a regular stage. Nothing interesting here"
             }
         }
-        
-        stage('Step 3') {
+
+        stage('Step 4') {
             agent {
                 label 'slave1'
             }
@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-        stage('Step 4') {
+        stage('Step 5') {
             parallel {
                 stage('Parallel Stage 1') {
                     steps {
