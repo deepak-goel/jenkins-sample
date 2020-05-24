@@ -7,8 +7,7 @@ pipeline{
       stage('Init1'){
             steps{
 
-              checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'githubclone', url: 'https://github.com/Layshah25/jenkins-stuff.git']]])
-
+              checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ansible']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'githubclone', url: 'https://github.com/Layshah25/jenkins-stuff.git']]])
               sh 'ls'
               sh 'mkdir tm'
               dir('tm'){
