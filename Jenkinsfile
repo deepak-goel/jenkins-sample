@@ -6,7 +6,7 @@ pipeline{
   stages{
       stage('Init1'){
             steps{
-              cleanWs()
+
               checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'githubclone', url: 'https://github.com/Layshah25/jenkins-stuff.git']]])
 
               sh 'ls'
