@@ -1,71 +1,31 @@
-pipeline {
-    agent any
-    options { skipDefaultCheckout() }
-    stages {
+library 'flmu-reference-pipeline'
 
-        stage('Step 1') {
-            agent {
-                label 'slave1'
-            }
-            steps {
-                sh 'hostname && pwd'
-                echo "This is the first step of our pipeline"
-            }
+pipeline{
+
+  agent any
+  stages{
+      stage('Init1'){
+            steps{
+              cleanWs()
+              checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'githubclone', url: 'https://github.com/Layshah25/jenkins-stuff.git']]])
+
+              sh 'ls'
+              sh 'mkdir tm'
+              dir('tm'){
+              sh 'echo haha > t.txt'
+              sh 'cat t.txt'
+              stash includes: 't.txt', name: 't'
+              }
         }
-
-        // stage('Step 2') {
-        //     agent {
-        //         label 'master'
-        //     }
-        //     steps {
-        //         input('Do you want to proceed?')
-        //     }
-        // }
-
-        stage('Step 3') {
-            agent {
-                label 'master'
-            }
-            steps {
-                sh 'hostname && pwd'
-                echo "Just a regular stage. Nothing interesting here"
-            }
+      }
+      stage('Init2'){
+          steps{
+              sh 'hostname'
+              
+              sh 'ls'
+              unstash 't'
+              sh 'ls'
         }
-
-        stage('Step 4') {
-            agent {
-                label 'slave1'
-            }
-            steps {
-                sh 'hostname && pwd'
-                echo "Just a regular stage. Nothing interesting here"
-            }
-        }
-
-        stage('Step 5') {
-            parallel {
-                stage('Parallel Stage 1') {
-                    steps {
-                        sh 'hostname && pwd'
-                        echo "This is the first parallel stage"
-                        sh 'ls -al'
-                        sh 'sleep 2'
-                        sh 'touch file'
-                    }
-                }
-                stage('Parallel Stage 2') {
-                    steps {
-                        sh 'hostname && pwd'
-                        echo "This is the second parallel stage"
-                        sh 'ls -al'
-                        sh 'sleep 5'
-                        sh 'echo "after sleep"'
-                        sh 'ls -al'
-
-                    }
-                }
-            }
-        }
-
-    }
+      }
+   }
 }
